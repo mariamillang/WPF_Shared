@@ -1,0 +1,58 @@
+﻿<Window x:Class="UD04WPFTrabajoClase.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UD04WPFTrabajoClase"
+        mc:Ignorable="d"
+        Title="MenuWindow" Height="450" Width="800">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="New">
+                    <MenuItem Header="Open Message Box" Click="OpenMessageBox"></MenuItem>
+                    <MenuItem IsCheckable="True" Header="OcultarTexto"   
+                            Checked="show_Checked"
+                            Unchecked="show_Unchecked"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <StackPanel Margin="10">
+                <TextBox Name="miTexto" Text="Right-click here for context menu!">
+                    <TextBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Command="Cut">
+                                <!--<MenuItem.Icon></MenuItem.Icon>-->
+                            </MenuItem>
+                            <MenuItem Command="Copy">
+                            </MenuItem>
+                            <MenuItem Command="Paste">
+                            </MenuItem>
+                        </ContextMenu>
+                    </TextBox.ContextMenu>
+                </TextBox>
+                <ComboBox Margin="10">
+                    <ComboBoxItem>Hola</ComboBoxItem>
+                    <ComboBoxItem>Mi nombre</ComboBoxItem>
+                </ComboBox>
+                <ListBox Margin="10">
+                    <ListBoxItem>Hola</ListBoxItem>
+                    <ListBoxItem>Mi nombre</ListBoxItem>
+                </ListBox>
+                <CheckBox x:Name="cb1" Grid.Row="1" Margin="5,0,0,0" 
+              Content="Three-state CheckBox" IsThreeState="True"
+              Checked="HandleCheck" Unchecked="HandleUnchecked" 
+              Indeterminate="HandleThirdState" />
+                <TextBlock x:Name="text1" Grid.Row="2" Margin="5,0,0,0" />
+                <StackPanel Margin="0,10,0,0">
+                    <RadioButton Name="rb1" Checked="RadioButtonSelected" GroupName="RDGroup">Yes</RadioButton>
+                    <RadioButton Name="rb2" Checked="RadioButtonSelected"  GroupName="RDGroup">No</RadioButton>
+                    <RadioButton Name="rb3" Checked="RadioButtonSelected" IsChecked="True"  GroupName="RDGroup">No opinion</RadioButton>
+
+                    <!--<RadioButton Name="rb4" Checked="RadioButtonSelected"  GroupName="RDGroup2">Other opinion</RadioButton>-->
+                    <TextBlock x:Name="txtrb" Grid.Row="2" Margin="5,0,0,0" Text=""/>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+
+    </Grid>
+</Window>

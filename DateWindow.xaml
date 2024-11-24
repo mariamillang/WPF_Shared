@@ -1,0 +1,27 @@
+﻿<Window x:Class="UD04WPFTrabajoClase.DateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UD04WPFTrabajoClase"
+        mc:Ignorable="d"
+        Title="DateWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <Calendar Name="MyCalendar" Margin="20">
+                <Calendar.BlackoutDates>
+                    <CalendarDateRange Start="11/22/2024" End="1/22/2024"/>
+                </Calendar.BlackoutDates>
+            </Calendar>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+            <DatePicker Name="MyDatePicker" SelectedDateFormat="Long">
+                <DatePicker.BlackoutDates>
+                    <CalendarDateRange Start="11/22/2024" End="11/22/2024" />
+                    <CalendarDateRange Start="2024-11-01" End="2024-11-03" />
+                </DatePicker.BlackoutDates>
+            </DatePicker>
+        </StackPanel>
+
+    </Grid>
+</Window>
