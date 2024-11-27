@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,22 @@ namespace UD04WPFTrabajoClase
         private void Open_ResourceWindow(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Debug.WriteLine("Entrando en el botón");
+            this.Cursor = Cursors.Hand;
+            TextBlock txt = (TextBlock)sender;
+            txt.Background = new SolidColorBrush(Colors.Red);
+        }
+
+        private void button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Debug.WriteLine("Saliendo en el botón");
+            this.Cursor = null;
+            TextBlock txt = (TextBlock)sender;
+            txt.Background = null;
         }
     }
 }

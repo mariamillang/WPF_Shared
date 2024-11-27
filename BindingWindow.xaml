@@ -27,6 +27,41 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="TextEvent">
+            <EventSetter Event="TextBlock.MouseEnter" Handler="button_MouseEnter"></EventSetter>
+            <EventSetter Event="TextBlock.MouseLeave" Handler="button_MouseLeave"></EventSetter>
+        </Style>
+        <Style x:Key="TextWithBackGroundStyle" BasedOn="{StaticResource ButtonFontStyle}">
+            <Setter Property="ItemsControl.Background" Value="Orange"></Setter>
+        </Style>
+        <Style x:Key="BtnTriggerStyle">
+            <Style.Setters>
+                <Setter Property="ItemsControl.Background" Value="LightCoral"></Setter>
+                <Setter Property="ItemsControl.Foreground" Value="White"></Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.IsMouseOver" Value="True">
+                    <!--<Setter Property="ItemsControl.Background" Value="Orange" />-->
+                    <Setter Property="ItemsControl.FontWeight" Value="Bold" />
+                    <Setter Property="ItemsControl.Foreground" Value="Red"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BtnMultiTriggerStyle">
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Button.IsMouseOver" Value="True"></Condition>
+                        <Condition Property="Button.IsPressed" Value="True"></Condition>
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.Setters>
+                        <Setter Property="ItemsControl.FontSize" Value="20"></Setter>
+                        <Setter Property="ItemsControl.Foreground" Value="BlueViolet"></Setter>
+                    </MultiTrigger.Setters>
+                </MultiTrigger>
+            </Style.Triggers>
+            
+        </Style>
     </Window.Resources>
     <Grid>
         <StackPanel Margin="10">
@@ -44,10 +79,40 @@
                 <Button Name="btnLarge" Click="btnLarge_Click" Margin="5">Grande</Button>
             </StackPanel>
             <StackPanel>
-                <Button  Style="{StaticResource BackgroundBtnStyle}">
-                    Mi botón
+                <Button  Style="{StaticResource BackgroundBtnStyle}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Cambiar color de fondo
+                </Button>
+                <TextBlock Style="{StaticResource TextEvent}">
+                    Texto que cambia de color</TextBlock>
+
+                <TextBlock Style="{StaticResource TextWithBackGroundStyle}">
+                    Texto con color de fondo</TextBlock>
+            </StackPanel>
+            <Separator></Separator>
+            <StackPanel>
+                <Button Style="{StaticResource BtnTriggerStyle}">                  
+                    Aplicando triggers desde recursos
+                </Button>
+                <Button>
+                    <Button.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.IsMouseOver" Value="True">
+                                    <Setter Property="ItemsControl.FontWeight" Value="Bold" />
+                                    <Setter Property="ItemsControl.Foreground" Value="Orange"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    Aplicando triggers desde button
+                </Button>
+                <Button Style="{StaticResource BtnMultiTriggerStyle}">                    
+                    Aplicando multitriggers desde recursos
                 </Button>
             </StackPanel>
         </StackPanel>
+     
+       
     </Grid>
 </Window>
