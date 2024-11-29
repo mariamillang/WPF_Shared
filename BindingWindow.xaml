@@ -13,8 +13,8 @@
             <Setter Property="ItemsControl.Foreground" Value="Red"></Setter>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="ItemsControl.FontFamily" Value="Arial"></Setter>
-            <Setter Property="ItemsControl.Foreground" Value="Blue"></Setter>
+            <Setter Property="FontFamily" Value="Arial"></Setter>
+            <Setter Property="Foreground" Value="Blue"></Setter>
         </Style>
         <Style x:Key="BackgroundBtnStyle">
             <Setter Property="ItemsControl.Background">
@@ -31,7 +31,7 @@
             <EventSetter Event="TextBlock.MouseEnter" Handler="button_MouseEnter"></EventSetter>
             <EventSetter Event="TextBlock.MouseLeave" Handler="button_MouseLeave"></EventSetter>
         </Style>
-        <Style x:Key="TextWithBackGroundStyle" BasedOn="{StaticResource ButtonFontStyle}">
+        <Style x:Key="TextWithBackGroundStyle">
             <Setter Property="ItemsControl.Background" Value="Orange"></Setter>
         </Style>
         <Style x:Key="BtnTriggerStyle">
@@ -60,19 +60,46 @@
                     </MultiTrigger.Setters>
                 </MultiTrigger>
             </Style.Triggers>
-            
+
         </Style>
+        <Style x:Key="changeFontSize">
+            <EventSetter Event="Button.Click" Handler="btnSmall_Click"></EventSetter>
+        </Style>
+        <!--Cambios en el controlTemplate de un botón-->
+        <ControlTemplate x:Key="ButtonControlTemplate" TargetType="Button">
+            <Grid>
+                <Border x:Name="ButtonBorder"
+                      Background="{TemplateBinding Background}" 
+                      BorderBrush="{TemplateBinding BorderBrush}" 
+                      BorderThickness="{TemplateBinding BorderThickness}" 
+                      CornerRadius="10">
+                    <ContentPresenter Name="txtButton" HorizontalAlignment="Center" TextElement.Foreground="{TemplateBinding Foreground}"
+                    VerticalAlignment="Center"/>
+                </Border>
+                
+            </Grid>
+
+            <ControlTemplate.Triggers>
+                <!-- Cambiar el color de fondo y el borde al pasar el mouse -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="ButtonBorder" Property="Background" Value="LightGreen"/>
+                    <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="DarkGreen"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
     <Grid>
         <StackPanel Margin="10">
-            <Slider Name="sliderFontSize" Margin="3" Minimum="1" Maximum="40" Value="10" TickFrequency="1" 
+            <Slider Name="sliderFontSize" Margin="3" Minimum="1" Maximum="40" Value="0" 
+                    TickFrequency="1" 
              TickPlacement="TopLeft" />
             <TextBlock Margin="10" Name="lblFontSize" 
-                FontSize="{Binding ElementName=sliderFontSize, Path=Value, Mode=TwoWay}" 
+                FontSize="{Binding ElementName=sliderFontSize, Path=Value}" 
                 Text="Texto que cambia su tamaño">
             </TextBlock>
             <StackPanel Orientation="Horizontal">
-                <Button Name="btnSmall" Click="btnSmall_Click" Margin="5" 
+                <Button Name="btnSmall" Style="{StaticResource changeFontSize}" Margin="5" 
                      FontFamily="{StaticResource ButtonFontFamilyStyle}">Pequeño</Button>
                 <Button Name="btnNormal" Click="btnNormal_Click" Margin="5"
                      Style="{StaticResource ButtonFontStyle}">Normal</Button>
@@ -91,7 +118,7 @@
             </StackPanel>
             <Separator></Separator>
             <StackPanel>
-                <Button Style="{StaticResource BtnTriggerStyle}">                  
+                <Button Style="{StaticResource BtnTriggerStyle}">
                     Aplicando triggers desde recursos
                 </Button>
                 <Button>
@@ -107,12 +134,20 @@
                     </Button.Style>
                     Aplicando triggers desde button
                 </Button>
-                <Button Style="{StaticResource BtnMultiTriggerStyle}">                    
+                <Button Style="{StaticResource BtnMultiTriggerStyle}">
                     Aplicando multitriggers desde recursos
                 </Button>
+                <Button Template="{StaticResource ButtonControlTemplate}"
+                        Background="LightBlue" 
+                        BorderBrush="DarkBlue" 
+                        BorderThickness="2" 
+                        Content="Hover Me" 
+                        Width="100" 
+                        Height="40"/>
+
             </StackPanel>
         </StackPanel>
-     
-       
+
+
     </Grid>
 </Window>
